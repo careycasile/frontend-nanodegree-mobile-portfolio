@@ -404,17 +404,21 @@ var resizePizzas = function(size) {
   'use strict';
   window.performance.mark("mark_start_resize");   // User Timing API function
   var pizzaSizes = document.getElementById("pizzaSize").innerHTML;
+  var pizzaId = document.getElementById("pizzaSize");
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
         pizzaSizes = "Small";
+        pizzaId.innerHTML = pizzaSizes;
         return;
       case "2":
         pizzaSizes  = "Medium";
+        pizzaId.innerHTML = pizzaSizes;
         return;
       case "3":
         pizzaSizes  = "Large";
+        pizzaId.innerHTML = pizzaSizes;
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -457,10 +461,9 @@ var resizePizzas = function(size) {
     'use strict';
     var randomPizzaContainer = document.getElementsByClassName("randomPizzaContainer");
     var len = randomPizzaContainer.length;
-
+    var dx = size;
+    var newwidth = randomPizzaContainer[0].offsetWidth + dx + 'px';
     for (var i = 0; i < len; i++) {
-        var newwidth = randomPizzaContainer[i].offsetWidth + dx + 'px';
-        var dx = size;
       randomPizzaContainer[i].style.width = dx;
     }
   }
