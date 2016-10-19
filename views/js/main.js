@@ -400,6 +400,7 @@ var pizzaElementGenerator = function(i) {
 };
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
+//Added use strict mode to functions
 var resizePizzas = function(size) {
   'use strict';
   window.performance.mark("mark_start_resize");   // User Timing API function
@@ -456,15 +457,16 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  //THIS IS WHERE THE PROBLEM IS
   function changePizzaSizes(size) {
     'use strict';
+    //changed query selector to getElementsByClassName
     var randomPizzaContainer = document.getElementsByClassName("randomPizzaContainer");
+    //optimized for loop, removed uneeded variables into the function from the loop
     var len = randomPizzaContainer.length;
-    var dx = size;
+    var dx = determineDx( randomPizzaContainer[0], size);
     var newwidth = randomPizzaContainer[0].offsetWidth + dx + 'px';
     for (var i = 0; i < len; i++) {
-      randomPizzaContainer[i].style.width = dx;
+      randomPizzaContainer[i].style.width = newwidth;
     }
   }
 
@@ -480,6 +482,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+//pizzasDiv declared outside of the loop
 var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -514,7 +517,7 @@ function updatePositions() {
   'use strict';
   frame++;
   window.performance.mark("mark_start_frame");
-
+  //changed query selector to getElementsByClassName
   var items = document.getElementsByClassName('mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
@@ -538,7 +541,9 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  //movingPizzas1 declared outside of the loop and changed to getElementById instead of query selector
   var movingPizzas1 = document.getElementById("movingPizzas1");
+  //var elem declared in the beginning of the for loop instead of the body
   for (var i = 0, elem; i < ((screen.height/100) * 4); i++) {
     elem = document.createElement('img');
     elem.className = 'mover';

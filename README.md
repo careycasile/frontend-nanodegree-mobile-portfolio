@@ -53,3 +53,11 @@ The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstra
 
 * <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+
+### Application Specifics
+- views/js/main.js was optimized to render at 60 frames per second.
+- views/pizza.html resizes pizzas when slider is used in less than 5ms.
+- index.html achieves a pagespeed score of over 90/100 on desktop and mobile
+
+### Running the Application
+index.html CSS was inlined in the head to increase page speed. Render blocking JavaScript was moved to the bottom of the page. Images were optimized. main.js' JavaScript was optimized by swapping query selectors with getElementBy-. Uneeded items were removed from loops as to not be called each time the loop iterates. "use strict" mode was added to functions. To run the applicaiton, load up the main page and navigate towards the Pizza page. Use the slide bar to change the pizza sizes. 
